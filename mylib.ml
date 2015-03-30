@@ -345,7 +345,7 @@ let tac_intro_exists (t: term) : tactic =
   fun (hyps, g) ->
     let t = term_for_goal (hyps, g) t in
     if is_exists g then
-      let x, te = dest_forall g in
+      let x, te = dest_exists g in
       let new_te = subst [x, t] te in
       [ hyps, new_te ], fun [p] -> exists_rule (g, t) p
     else
@@ -548,3 +548,6 @@ let pt = Leaf ([], `a \/ ~a`);;
 let pt = apply_tactic pt (tac_add_thm excluded_middle_thm);;
 let pt = apply_tactic pt (tac_elim_forall 0 `a`);;
 let pt = apply_tactic pt (tac_asm);;
+
+let pt = Leaf ([], `? x. (\ b. b) x`);;
+let pt = apply_tactic pt (tac_intro_exists `true`);;
