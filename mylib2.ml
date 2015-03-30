@@ -393,7 +393,7 @@ let tac_rewrite_hyps (i: int) (direction: bool) (j: int) =
     let g', g'' = rewrite_in_term te a b in
     let t =
       tac_then (tac_cut g'') [
-	(tac_then (tac_rewrite_goal 0 false) [tac_asm]); tac_remove_hyps [1; j+1]
+	(tac_then (tac_rewrite_goal i (not direction)) [tac_asm]); tac_remove_hyps [j+1]
       ]
     in
     t (hyps, g)
