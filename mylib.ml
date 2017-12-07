@@ -302,6 +302,12 @@ let make_fresh_thm (thm: thm) (g: goal) =
   
 (* tacticals *)
 
+
+let tac_id : tactic =
+  fun goal ->
+    [goal], fun [p] -> p
+;;
+
 let tac_then (tac: tactic) (tacs: tactic list) : tactic =
   fun goal ->
     let gs, f = tac goal in
@@ -315,11 +321,6 @@ let tac_then (tac: tactic) (tacs: tactic list) : tactic =
 ;;
 
   
-let tac_id : tactic =
-  fun goal ->
-    [goal], fun [p] -> p
-;;
-
 (* tactics *)
 
 
